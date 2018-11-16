@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import Foundation
+
 
 public class SwiftDartRsaPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -9,6 +11,11 @@ public class SwiftDartRsaPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    let (privateKey, publicKey) = try! CC.RSA.generateKeyPair(2048)
+    //let privateKeyPEM = try SwKeyConvert.PrivateKey.derToPKCS1PEM(privateKey)
+    let publicKeyPEM = SwKeyConvert.PublicKey.derToPKCS8PEM(publicKey)
+
+    //result("iOS " + UIDevice.current.systemVersion);
+    result("iOS " + Disburden().name);
   }
 }

@@ -10,4 +10,10 @@ class DartRsa {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+
+  static Future<String> test() async {
+    final String version = await _channel.invokeMethod('test');
+    return version;
+  }
 }
